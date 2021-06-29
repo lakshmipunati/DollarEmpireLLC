@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 16px;
+}
+
+.example-card {
+  width: 100%;
+  margin: 4px
+}
+
+mat-card-title {
+  font-size: 12px
+}

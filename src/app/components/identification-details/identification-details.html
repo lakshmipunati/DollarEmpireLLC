@@ -1,0 +1,45 @@
+<div class="container">
+    <h2>Identification Details</h2>
+</div>
+<div class="container" fxFlex fxLayoutGap="10px">
+    <form [formGroup]="identificationForm">
+        <div fxLayout="row wrap">
+            <mat-card class="example-card" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)"
+                fxFlex.gt-md="0 1 calc(25%-10px)">
+                <mat-card-header>
+                    <mat-card-subtitle>Identification details Form</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <div fxLayout="column" fxFlex class="pointer">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Customer Name/ID" formControlName="customerName" required>
+                            <mat-error *ngIf="identificationForm.get('customerName')?.invalid ||
+                        identificationForm.get('customerName')?.hasError('required')">
+                                Customer Name/ID is mandatory
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxFlex class="pointer">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Cell No" formControlName="cell" mask='(000) 000-0000'>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxFlex class="pointer">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Phone No" formControlName="phone" mask='(000) 000-0000' >
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxFlex class="pointer">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Address" formControlName="address">
+                        </mat-form-field>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <div class="container" fxFlex fxLayoutGap="10px">
+                <button mat-raised-button color="primary" (click)='submitIdentificationData(identificationForm)'>Proceed
+                    to add Items</button>
+            </div>
+        </div>
+    </form>
+</div>

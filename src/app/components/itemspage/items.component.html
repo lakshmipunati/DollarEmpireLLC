@@ -1,0 +1,142 @@
+<div class="container">
+  <h2>Items Page</h2>
+</div>
+<div class="container" fxFlex fxLayoutGap="10px">
+  <mat-card fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxFlex.gt-md="0 1 calc(25%-10px)">
+    <mat-card-header style="text-align: center !important;">
+      <mat-card-subtitle>Items Page</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayout="column wrap" fxLayout.xs="column">
+        <div fxLayout="row" fxFlex class="pointer">
+          <button type="button" class="mat-raised-button ml-8" mat-button color="primary"
+            (click)='navigateToadditionalDetails()'>Submit</button>
+          <button color="primary" mat-raised-button class="m-4" (click)="openDialog()">Scan</button>
+          <mat-form-field appearance="outline" class="mt-8">
+            <input matInput placeholder="Enter Item ID" fxFlex="70">
+          </mat-form-field>
+          <button mat-icon-button color="primary" aria-label="Search" (click)="searchData()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+
+        <div fxLayout="column wrap" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.xs="0 1 calc(33%-10px)"
+          fxFlex.gt-md="0 1 calc(25%-10px)" style="display: flex;justify-content: center;">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-subtitle>Scanned Item detail</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                {{scannedValues}}
+
+              </p>
+            </mat-card-content>
+            <mat-card-actions style="float: right;">
+              <button mat-raised-button color="primary" (click)="itemAccepted()">Accept</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+
+        <div flex fxLayout="column wrap" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.xs="0 1 calc(33%-10px)"
+          fxFlex.gt-md="0 1 calc(25%-10px)" style="display: flex;justify-content: center;">
+          <table mat-table mainflex [dataSource]="dataSource">
+            <ng-container matColumnDef="no" fxLayoutGap="10px">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element" style="width:20%"> {{element.no}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="items" fxLayoutGap="10px">
+              <th mat-header-cell *matHeaderCellDef> Items </th>
+              <td mat-cell *matCellDef="let element" style="width:40%"> {{element.items}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef> Quantity </th>
+              <td mat-cell *matCellDef="let element;let i = index" style="width: 40%;">
+                <button (click)="incrementQuantity(i, element)" class="mr-8">+</button>
+                <mat-form-field appearance="outline" class="mt-8" style="width:60px">
+                  <input matInput placeholder="Enter Item ID" [(ngModel)]="element.quantity">
+                </mat-form-field>
+                <button (click)="decreaseQuantity(i, element)">-</button>
+              </td>
+              <!-- <td mat-cell *matCellDef="let element"> {{element.quantity}} </td> -->
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<!-- <mat-card class="example-card" >
+    <mat-card-header>
+      <mat-card-subtitle>Items Page</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div style="display: flex;justify-content: center;">
+        <div class="mt-8"><button type="button" class="mat-raised-button" mat-button color="primary"
+            (click)='navigateToadditionalDetails()'>Submit</button></div>
+        <div class="mt-8 ml-8"><button color="primary" mat-raised-button (click)="openDialog()">Scan</button></div>
+        <div class="ml-8">
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="Enter Item ID" fxFlex="70">
+          </mat-form-field>
+        </div>
+        <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+
+      <div fxLayout="row wrap" fxFlex="25%" style="display: flex;justify-content: center;">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-subtitle>Scanned Item detail</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <p>
+              {{scannedValues}}
+
+            </p>
+          </mat-card-content>
+
+          <mat-card-actions style="float: right;">
+            <button mat-raised-button color="primary">Accept</button>
+          </mat-card-actions>
+        </mat-card>
+
+      </div>
+      <div flex style="display: flex;justify-content: center;">
+        <table mat-table [dataSource]="dataSource">
+
+          <ng-container matColumnDef="no">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.no}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="items">
+            <th mat-header-cell *matHeaderCellDef> Items </th>
+            <td mat-cell *matCellDef="let element"> {{element.items}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Quantity </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+      </div>
+    </mat-card-content>
+
+    
+  </mat-card> -->

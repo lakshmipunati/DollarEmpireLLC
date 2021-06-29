@@ -1,0 +1,28 @@
+
+  <h2>Barcode & QR code scanner POC</h2>
+  
+  <!-- <button (click)="openScanner()"> Scan </button> -->
+  
+  <ng-container *ngIf="(initCamera$ | async)?.success; else showDeviceError">
+    <zxing-scanner 
+      #scanner 
+      class="qr-code-scan-camera-background" 
+      start="true" 
+      [device]="currentDevice" 
+      [tryHarder]="true" [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']"
+      (scanSuccess)="handleQrCodeResult($event)">
+    </zxing-scanner> 
+    <div>Scanned Value:  {{scannedValue}}</div>
+    <button class="cancel-button" (click)="cancelQrCodeScan()">
+      <span [innerHTML]="'Cancel scan'"></span>
+    </button>
+  </ng-container>
+  <ng-template #showDeviceError>
+    <div *ngIf="(initCamera$ | async)?.error as scanError">
+      <span [innerHTML]="scanError"></span>
+      <button [innerHTML]="'Try again'" (click)="tryAgainQrCodeScan()"></button>
+    </div>
+  </ng-template>
+  
+  
+  

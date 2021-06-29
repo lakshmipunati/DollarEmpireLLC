@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 16px;
+}
+
+.qr-code-scan-camera-background {
+  max-width: 500px;
+}
+
+table {
+ width:100%;
+  border: 1px solid #DCDCDC;
+  border-radius: 4px;
+  margin: 4px
+}
+
+.example-card {
+ width:100%;
+  margin: 4px
+}
+
+.mt-8 {
+  margin-top: 4px;
+}
+.mr-8{
+  margin-right: 10px;
+}
+.m-4{
+  margin: 4px;
+}
+
+

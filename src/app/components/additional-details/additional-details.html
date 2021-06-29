@@ -1,0 +1,21 @@
+<div class="container">
+    <h2>Additional Notes Page</h2>
+</div>
+<div class="container" fxFlex fxLayoutGap="10px">
+    <div fxLayout="row wrap">
+        <mat-card class="example-card" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)"
+            fxFlex.gt-md="0 1 calc(25%-10px)">
+            <mat-card-header style="text-align: center !important;">
+                <mat-card-subtitle>Additional Notes / Instructions</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content style="height: 200px;">
+                <mat-form-field appearance="outline" class="mt-8" style="width: 100%;">
+                    <textarea matInput rows="5" [(ngModel)]="additionalNotes"></textarea>
+                </mat-form-field>
+            </mat-card-content>
+        </mat-card>
+        <div class="container" fxFlex fxLayoutGap="10px">
+            <button mat-raised-button color="primary" (click)="placeOrder()">Place Order</button>
+        </div>
+    </div>
+</div>

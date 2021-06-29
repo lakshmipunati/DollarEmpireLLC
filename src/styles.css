@@ -1,0 +1,20 @@
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+div.container {
+    margin: 0px 40px;
+  }
+
+  mat-card-subtitle {
+    font-size: 12px;
+    font-weight: bold;
+    align-items: center;
+  }
+  
+  mat-form-field {
+    margin-right: 8px;
+    font-size: 11px !important;
+  }
