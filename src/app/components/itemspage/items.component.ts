@@ -80,6 +80,7 @@ export class ItemsComponent implements OnInit {
     this.dataSource[index].quantity = selectedObj.quantity - 1;
   }
 
+  
 }
 
 const ELEMENT_DATA = [
