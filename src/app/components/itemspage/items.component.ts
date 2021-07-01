@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { MatDialog } from '@angular/material/dialog';
 import { QrcodeScanComponent } from '../qrcode/qrcode-scanner.component';
-import { IdentificationDetailService } from '../../shared/services/identification-details.service';
-
+import { CommonAPIService } from '../../shared/services/common.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.scss']
@@ -17,10 +17,13 @@ export class ItemsComponent implements OnInit {
   displayedColumns: string[] = ['no', 'items', 'quantity'];
   dataSource: any = ELEMENT_DATA;
   scannedValues;
+  searchValue: string;
 
   constructor(private _router: Router,
     public dialog: MatDialog,
-    private _identificationService: IdentificationDetailService) { }
+    private _commonService: CommonAPIService,
+    private _toasterService: MatSnackBar,
+    private _activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -39,19 +42,34 @@ export class ItemsComponent implements OnInit {
   }
 
   searchData() {
-    this._identificationService.searchItem().subscribe((response) => {
-      console.log(response)
+    this._commonService.searchItem(this.searchValue).subscribe((response) => {
+      if(response.status == "success"){
+        this.dataSource = response.productList;
+      }
     })
   }
 
-  navigateToadditionalDetails() {
-    this._identificationService.getItemsPageData(this.dataSource);
-    this._router.navigate(['/additionalnotes'])
+  saveItem() {
+    // this._commonService.getItemsPageData(this.dataSource);
+    this._router.navigate(['/additionalnotes', 1]);
+    let request = {
+      customer_id: this._activateRoute.snapshot.paramMap.get('id'),
+      item: this.dataSource
+    }
+    this._commonService.saveItems(request).subscribe(response => {
+      if (response.status == "Success") {
+        this._toasterService.open(response.msg);
+        this._router.navigate(['/additionalnotes', response.customer_id]);
+      } else {
+        alert("API Error");
+      }
+    })
+
   }
 
   itemAccepted() {
     debugger
-    this.dataSource.push({ no: this.dataSource.length + 1, items: this.scannedValues, quantity: 1 })
+    this.dataSource.push({ no: this.dataSource.length + 1, items: this.scannedValues[0].item_name, quantity: this.scannedValues[0].quantity })
   }
 
   incrementQuantity(index, selectedObj) {
@@ -62,11 +80,8 @@ export class ItemsComponent implements OnInit {
     this.dataSource[index].quantity = selectedObj.quantity - 1;
   }
 
-
-
-
 }
 
 const ELEMENT_DATA = [
-  { no: 1, items: 'Light Bulb', quantity: 1 }
+  { item_id: 1, item_name: 'Light Bulb', quantity: 1 }
 ];

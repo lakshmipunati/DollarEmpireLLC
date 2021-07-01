@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IdentificationFormModel } from '../../shared/models/identification-detail.model';
-import { IdentificationDetailService } from '../../shared/services/identification-details.service';
+import { CommonAPIService } from '../../shared/services/common.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   templateUrl: './identification-details.html',
@@ -13,7 +14,8 @@ export class IdentificationDetailComponent implements OnInit {
 
   constructor(
     private _router: Router,
-    private _identificationService: IdentificationDetailService
+    private _commonService: CommonAPIService,
+    private _toasterService: MatSnackBar
   ) { this.buildIdentificationForm(); }
 
   ngOnInit() {
@@ -22,21 +24,22 @@ export class IdentificationDetailComponent implements OnInit {
 
   buildIdentificationForm() {
     return this.identificationForm = new FormGroup({
-      customerName: new FormControl('', Validators.required),
+      customer_name: new FormControl('', Validators.required),
       cell: new FormControl(),
-      phone: new FormControl(),
+      phone_number: new FormControl(),
       address: new FormControl()
     })
   }
 
   submitIdentificationData(identificationFormObj) {
     console.log(identificationFormObj.value);
-    this._router.navigate(['/items']);
-    
+    debugger
+    this._router.navigate(['/items',1]);
     // if (identificationFormObj.valid) {
-    //   this._identificationService.postIdentificationFormDetails(identificationFormObj.value).subscribe(response => {
-    //     if (response) {
-    //       this._router.navigate(['/items']);
+    //   this._commonService.postCustomerDetails(identificationFormObj.value).subscribe(response => {
+    //     if (!response.msg) {
+    //       this._toasterService.open(response.msg);
+    //       this._router.navigate(['/items', response.customer_id]);
     //     } else {
     //       alert("API Error")
     //     }

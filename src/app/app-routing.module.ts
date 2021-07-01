@@ -6,8 +6,8 @@ import { AdditionalDetailComponent } from '../app/components/additional-details/
 
 const routes: Routes = [
   { path: 'identification', component: IdentificationDetailComponent },
-  { path: 'items', component: ItemsComponent },
-  { path: 'additionalnotes', component: AdditionalDetailComponent },
+  { path: 'items/:id', component: ItemsComponent },
+  { path: 'additionalnotes/:id', component: AdditionalDetailComponent },
   {path: '**', redirectTo: '/identification'}
 ];
 

@@ -12,9 +12,9 @@
                 <mat-card-content>
                     <div fxLayout="column" fxFlex class="pointer">
                         <mat-form-field appearance="outline">
-                            <input matInput placeholder="Customer Name/ID" formControlName="customerName" required>
-                            <mat-error *ngIf="identificationForm.get('customerName')?.invalid ||
-                        identificationForm.get('customerName')?.hasError('required')">
+                            <input matInput placeholder="Customer Name/ID" formControlName="customer_name" required>
+                            <mat-error *ngIf="identificationForm.get('customer_name')?.invalid ||
+                        identificationForm.get('customer_name')?.hasError('required')">
                                 Customer Name/ID is mandatory
                             </mat-error>
                         </mat-form-field>
@@ -26,7 +26,7 @@
                     </div>
                     <div fxLayout="column" fxFlex class="pointer">
                         <mat-form-field appearance="outline">
-                            <input matInput placeholder="Phone No" formControlName="phone" mask='(000) 000-0000' >
+                            <input matInput placeholder="Phone No" formControlName="phone_number" mask='(000) 000-0000'>
                         </mat-form-field>
                     </div>
                     <div fxLayout="column" fxFlex class="pointer">

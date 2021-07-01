@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule , ReactiveFormsModule }   from '@angular/forms';
-import { HttpClientModule} from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { ItemsComponent } from './components/itemspage/items.component';
@@ -20,6 +20,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 @NgModule({
   declarations: [
     AppComponent, ItemsComponent, IdentificationDetailComponent, AdditionalDetailComponent, QrcodeScanComponent
@@ -29,7 +31,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule ,
+    ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     ZXingScannerModule,
 
@@ -40,6 +42,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatCardModule,
     MatIconModule,
     MatDialogModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
 
     AppRoutingModule,
     BrowserAnimationsModule

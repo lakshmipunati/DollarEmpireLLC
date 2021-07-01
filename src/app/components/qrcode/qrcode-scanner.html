@@ -1,21 +1,14 @@
-
-  <h2>Barcode & QR code scanner POC</h2>
-  
-  <!-- <button (click)="openScanner()"> Scan </button> -->
-  
+<h2 mat-dialog-title>Scan Barcode</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-spinner *ngIf="_loader" style="margin:0 auto;" 
+  mode="indeterminate"></mat-spinner>
+ 
   <ng-container *ngIf="(initCamera$ | async)?.success; else showDeviceError">
-    <zxing-scanner 
-      #scanner 
-      class="qr-code-scan-camera-background" 
-      start="true" 
-      [device]="currentDevice" 
+    <zxing-scanner #scanner class="qr-code-scan-camera-background" start="true" [device]="currentDevice"
       [tryHarder]="true" [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']"
       (scanSuccess)="handleQrCodeResult($event)">
-    </zxing-scanner> 
-    <div>Scanned Value:  {{scannedValue}}</div>
-    <button class="cancel-button" (click)="cancelQrCodeScan()">
-      <span [innerHTML]="'Cancel scan'"></span>
-    </button>
+    </zxing-scanner>
+
   </ng-container>
   <ng-template #showDeviceError>
     <div *ngIf="(initCamera$ | async)?.error as scanError">
@@ -23,6 +16,9 @@
       <button [innerHTML]="'Try again'" (click)="tryAgainQrCodeScan()"></button>
     </div>
   </ng-template>
-  
-  
-  
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+</mat-dialog-actions>
+
